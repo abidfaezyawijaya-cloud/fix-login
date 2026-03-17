@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account   </title>
+    <link rel="icon" type="image/png" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fid.pngtree.com%2Ffree-png-vectors%2Flogo-bisnis&psig=AOvVaw1Wh0qLF3KTm_OsB9kZda6t&ust=1765275203408000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKikgNHgrZEDFQAAAAAdAAAAABAE">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #4c6ef5, #7950f2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            width: 320px;
+            padding: 35px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: fadeIn 0.7s ease;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #e0e0e0;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 10px;
+            border: 2px solid rgba(255,255,255,0.4);
+            background: transparent;
+            outline: none;
+            color: white;
+            font-size: 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: -9px;
+            left: 10px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .input-group input:focus {
+            border-color: white;
+        }
+
+        .toggle {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+            transition: 0.3s;
+        }
+
+        .toggle:hover {
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: #4c6ef5;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #f1f1f1;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="card">
+            <h2>Create Account</h2>
+            <p class="subtitle">Sign up to continue</p>
+
+            <div class="input-group">
+                <input type="text" id="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="email" required>
+                <label>Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="verifyEmail" required>
+                <label>Verify Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" required>
+                <label>Password</label>
+                <span class="toggle" data-target="password">👁️</span>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="verifyPassword" required>
+                <label>Verify Password</label>
+                <span class="toggle" data-target="verifyPassword">👁️</span>
+            </div>
+
+            <a href="https://abidfaezyawijaya-cloud.github.io/data/">SUBMIT</a>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <script>
+        // SHOW / HIDE PASSWORD
+        document.querySelectorAll(".toggle").forEach(icon => {
+            icon.addEventListener("click", () => {
+                let target = document.getElementById(icon.getAttribute("data-target"));
+
+                if (target.type === "password") {
+                    target.type = "text";
+                    icon.textContent = "🙈";
+                } else {
+                    target.type = "password";
+                    icon.textContent = "👁️";
+                }
+            });
+        });
+
+
+        // SUBMIT & VALIDASI
+        document.getElementById("submitBtn").addEventListener("click", () => {
+            
+            let username = document.getElementById("username").value.trim();
+            let email = document.getElementById("email").value;
+            let verifyEmail = document.getElementById("verifyEmail").value;
+            let password = document.getElementById("password").value;
+            let verifyPassword = document.getElementById("verifyPassword").value;
+            let msg = document.getElementById("message");
+
+            function showMsg(text, color) {
+                msg.textContent = text;
+                msg.style.color = color;
+                msg.style.transition = "0.3s";
+            }
+
+            // VALIDASI FORM
+            if (!username || !email || !verifyEmail || !password || !verifyPassword) {
+                showMsg("Semua input harus diisi!", "red");
+                return;
+            }
+
+            if (username.length < 3) {
+                showMsg("Username minimal 3 karakter!", "red");
+                return;
+            }
+
+            if (email !== verifyEmail) {
+                showMsg("Email tidak cocok!", "red");
+                return;
+            }
+
+            if (password.length < 6) {
+                showMsg("Password minimal 6 karakter!", "red");
+                return;
+            }
+
+            if (password !== verifyPassword) {
+                showMsg("Password tidak cocok!", "red");
+                return;
+            }
+
+            // JIKA SEMUA VALID
+            showMsg("Akun berhasil dibuat! ✔", "lightgreen");
+
+            // RESET FORM SETELAH 1 DETIK
+            setTimeout(() => {
+                document.querySelectorAll("input").forEach(input => {
+                    input.value = "";
+                });
+
+                msg.textContent = "";
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
